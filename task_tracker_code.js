@@ -13,8 +13,6 @@ let dateConf = [now.getDate(), months[now.getMonth()], now.getFullYear()]
 
 //nezinu
 const readline = require('node:readline');
-const { json } = require("node:stream/consumers");
-const { callbackify } = require("node:util");
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
@@ -42,6 +40,3 @@ rl.question("Tasks_Tracker : ", command => {
     }
     rl.close()
 })
-
-
-
