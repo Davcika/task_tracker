@@ -12,4 +12,4 @@ Adter executing .js file you can use this commands -->
     mark-done -> sets status of a task to "done" (example: mark-done,2)
     list -> prints out all tasks, can be used together with status to print only tasks with specific status(example: list,done)
 
-project URL: https://roadmap.sh/projects/task-tracker
+https://roadmap.sh/projects/expense-tracker
