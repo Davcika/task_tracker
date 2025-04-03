@@ -15,7 +15,7 @@ function indexById(selectedId){
 //Checks if id is written by user
 function idExists(selected){
     if(!selected){
-        console.log("Id is not selected!")
+        console.log("Write needed values.")
         return false
     }
     return true
@@ -34,7 +34,7 @@ else{
 //Date handlerer
 let now = new Date()
 let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-let dateConf = [now.getDate(), months[now.getMonth()], now.getFullYear()]
+let date = [now.getDate(), months[now.getMonth()], now.getFullYear()].toString().replace(/,/g, ' ')
 
 //cmd
 const readline = require('node:readline');
@@ -54,12 +54,13 @@ rl.question("Tasks_Tracker : ", command => {
 
     switch(command.toLowerCase()){
         case "add": //done
-            var data = {'id': id, 'desc': text, 'status': "todo", 'date': dateConf.toString().replace(/,/g, ' ')}
+            var data = {'id': id, 'desc': text, 'status': "todo", 'date': date}
             obj.push(data)
+            console.log(`Task added successfully (ID: ${id})`)
             break;
             
         case "delete"://done
-            idExists(selectedId)
+            if(!idExists(selectedId)) break;
             obj.splice(index, 1)
             for(let i = index; i < obj.length; i++){
                 obj[i].id --;
@@ -72,19 +73,31 @@ rl.question("Tasks_Tracker : ", command => {
                 break;
             }
             obj[index].desc = text;
+            obj[index].date = date;
             break;
         
         case "mark-in-progress"://done
-            idExists(selectedId)
-            obj[index].status = "done"
+            if(!idExists(selectedId)) break;
+            obj[index].status = "in_progress"
             break;
-            
+        
+        case "mark-done"://done
+            if(!idExists(selectedId)) break;
+            obj[index].status = "done"
+            break
+        
+        case "list"://done
+            if(!idExists(text)) console.log(obj);
+            for(const arr of obj){
+                if(arr.status == text) console.log(arr)
+            }
+            break
+
         default:
             console.log("wrong command");
             break;
     }
 
-    console.log(obj)
     var output = "[\n" + obj.map(entry => JSON.stringify(entry)).join(",\n") + "\n]";
     fs.writeFileSync('./task_tracker_data.json', output)
     rl.close()
