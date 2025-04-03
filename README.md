@@ -11,3 +11,5 @@ Adter executing .js file you can use this commands -->
     mark-in-progress -> sets status of a task to "in_progress" (example: mark-in-progress,2)
     mark-done -> sets status of a task to "done" (example: mark-done,2)
     list -> prints out all tasks, can be used together with status to print only tasks with specific status(example: list,done)
+
+project URL: https://roadmap.sh/projects/task-tracker
